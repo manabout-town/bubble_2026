@@ -1,4 +1,6 @@
-package _my.test02;
+package test03;
+
+import _my.test02.Player;
 
 import javax.swing.*;
 import java.awt.event.KeyAdapter;
@@ -20,7 +22,7 @@ public class BubbleFrame extends JFrame {
     setSize(1000,640);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-    backgroundMap = new JLabel(new ImageIcon("img/backgroundMap.png"));
+    backgroundMap = new JLabel(new ImageIcon("img/backgroundMapService.png"));
     setContentPane(backgroundMap);
 
     player = new Player();
@@ -68,7 +70,7 @@ public class BubbleFrame extends JFrame {
   }
 
   public static void main(String[] args) {
-    new BubbleFrame();
+    new _my.test02.BubbleFrame();
   }
 
 } // end of class

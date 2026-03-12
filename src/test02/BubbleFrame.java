@@ -1,4 +1,6 @@
-package test01;
+package test02;
+
+import _my.test02.Player;
 
 import javax.swing.*;
 import java.awt.event.KeyAdapter;
@@ -16,38 +18,47 @@ public class BubbleFrame extends JFrame {
   }
 
   private void initData() {
-    setTitle("버블버블게임");
-    setSize(1000,600);;
+    setTitle("버블버블 게임");
+    setSize(1000,640);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     backgroundMap = new JLabel(new ImageIcon("img/backgroundMap.png"));
     setContentPane(backgroundMap);
 
-
-//    player = new Player();
+    player = new Player();
   }
 
   private void setInitLayout() {
-    setLayout(null);;
+    setLayout(null);
     setResizable(false); // 창 크기 고정
-    setLocationRelativeTo(null); // 화면 정중앙 배치 (프레임)
+    setLocationRelativeTo(null); // 화면 정중앙 배치(프레임)
 
     backgroundMap.add(player);
-
     setVisible(true);
   }
 
   private void addEventListener() {
     this.addKeyListener(new KeyAdapter() {
       @Override
-      public void keyPressed(KeyEvent e) {
-
-        // 방향키 코드를 player 의 이동 메서드로 연결
+      public void keyReleased(KeyEvent e) {
         switch (e.getKeyCode()) {
-          case KeyEvent.VK_LEFT :
+          case KeyEvent.VK_LEFT:
+            player.setLeft(false);
+            break;
+          case KeyEvent.VK_RIGHT:
+            player.setRight(false);
+            break;
+        }
+      }
+
+      @Override
+      public void keyPressed(KeyEvent e) {
+        // 방향키 코드를 Player의 이동 메서드 연결
+        switch (e.getKeyCode()){
+          case KeyEvent.VK_LEFT:
             player.left();
             break;
-          case KeyEvent.VK_RIGHT: 
+          case KeyEvent.VK_RIGHT:
             player.right();
             break;
           case KeyEvent.VK_UP:
@@ -55,16 +66,11 @@ public class BubbleFrame extends JFrame {
             break;
         }
       }
-
-      @Override
-      public void keyReleased(KeyEvent e) {
-
-      }
     });
   }
 
   public static void main(String[] args) {
-    new BubbleFrame();
+    new _my.test02.BubbleFrame();
   }
 
 } // end of class
