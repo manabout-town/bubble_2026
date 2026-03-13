@@ -1,8 +1,13 @@
-package _my.test05;
+package bubble;
 
+
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.swing.*;
 
+@Getter
+@Setter
 public class Player extends JLabel implements Moveable {
 
   // 플레이어의 현재 좌표 상태 값
@@ -38,21 +43,6 @@ public class Player extends JLabel implements Moveable {
    */
   private PlayerWay playerWay = PlayerWay.RIGHT;
 
-  /// getter
-  @Override
-  public int getX() {
-    return x;
-  }
-
-  public PlayerWay getPlayerWay() {
-    return playerWay;
-  }
-
-  @Override
-  public int getY() {
-    return y;
-  }
-
   public boolean isLeft() {
     return left;
   }
@@ -75,43 +65,6 @@ public class Player extends JLabel implements Moveable {
 
   public boolean isRightWallCrash() {
     return rightWallCrash;
-  }
-
-  /// setter
-  public void setX(int x) {
-    this.x = x;
-  }
-
-  public void setPlayerWay(PlayerWay playerWay) {
-    this.playerWay = playerWay;
-  }
-
-  public void setY(int y) {
-    this.y = y;
-  }
-
-  public void setLeft(boolean left) {
-    this.left = left;
-  }
-
-  public void setRight(boolean right) {
-    this.right = right;
-  }
-
-  public void setUp(boolean up) {
-    this.up = up;
-  }
-
-  public void setDown(boolean down) {
-    this.down = down;
-  }
-
-  public void setLeftWallCrash(boolean leftWallCrash) {
-    this.leftWallCrash = leftWallCrash;
-  }
-
-  public void setRightWallCrash(boolean rightWallCrash) {
-    this.rightWallCrash = rightWallCrash;
   }
 
 
@@ -190,7 +143,7 @@ public class Player extends JLabel implements Moveable {
   @Override
   public void up() {
     // 점프 기능을 어떻게 구현할까?
-    if(up) {
+    if (up) {
       return;
     }
     up = true;
@@ -222,16 +175,18 @@ public class Player extends JLabel implements Moveable {
     new Thread(new Runnable() {
       @Override
       public void run() {
-        for (int i = 0; i < JUMP_HEIGHT / JUMP_SPEED; i++) {
-          y = y + JUMP_SPEED;
+        while (down) {
+          y += JUMP_SPEED;
           setLocation(x, y);
           try {
-            Thread.sleep(3); // 5ms 간격 (낙하 보다 느리게 설정 낙하 3ms )
+            Thread.sleep(2);
           } catch (InterruptedException e) {
             throw new RuntimeException(e);
           }
+
+
         }
-        down = false;
+
       }
     }).start();
 

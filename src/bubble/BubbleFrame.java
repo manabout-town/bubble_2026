@@ -1,4 +1,4 @@
-package _my.test05;
+package bubble;
 
 
 import javax.swing.*;

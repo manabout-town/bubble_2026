@@ -1,4 +1,4 @@
-package _my.test05;
+package _my.test06;
 
 
 import javax.swing.*;
@@ -222,16 +222,18 @@ public class Player extends JLabel implements Moveable {
     new Thread(new Runnable() {
       @Override
       public void run() {
-        for (int i = 0; i < JUMP_HEIGHT / JUMP_SPEED; i++) {
-          y = y + JUMP_SPEED;
-          setLocation(x, y);
-          try {
-            Thread.sleep(3); // 5ms 간격 (낙하 보다 느리게 설정 낙하 3ms )
-          } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-          }
+        while (down) {
+          y += JUMP_SPEED;
+          setLocation(x,y);
+            try {
+              Thread.sleep(2);
+            } catch (InterruptedException e) {
+              throw new RuntimeException(e);
+            }
+
+
         }
-        down = false;
+
       }
     }).start();
 

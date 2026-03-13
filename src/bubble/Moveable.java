@@ -1,4 +1,4 @@
-package _my.test05;
+package bubble;
 
 public interface Moveable {
   void left();

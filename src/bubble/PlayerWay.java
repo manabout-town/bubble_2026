@@ -1,4 +1,4 @@
-package _my.test05;
+package bubble;
 
 /**
  *  [enum] 플레이어의 방향 상태

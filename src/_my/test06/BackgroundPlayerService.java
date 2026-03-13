@@ -1,4 +1,4 @@
-package _my.test05;
+package _my.test06;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -42,8 +42,30 @@ public class BackgroundPlayerService implements Runnable {
       Color leftColor = new Color(image.getRGB(player.getX(), player.getY() + 25));
       Color rightColor = new Color(image.getRGB(player.getX() + 60, player.getY() + 25));
 
+      // 바닥/층 감지 좌표 (플레이어 발 아래 두점)
+      int bottomLeft = image.getRGB(player.getX() + 20, player.getY() + 55);
+      int bottomRight = image.getRGB(player.getX() + 50, player.getY() + 55);
+      System.out.println("bottomLeft : " + bottomLeft);
+      System.out.println("bottomRight : " + bottomRight);
+
+      if (bottomLeft + bottomRight == -2) {
+        // 계속 낙하 시킬 예정
+        // 발 아래가 허공 -> 아직 점프/낙하 중이 아닐 때만 낙하 시작해야 함
+        // player.isUp() == false -> 점프 중이 아님
+        // player.isDown() == false -> 낙하 중이 아님
+        if (player.isUp() == false && player.isDown() == false) {
+          player.down();
+        }
+      } else {
+        // 발 아래가 바닥/ 층 -> 낙하 즉시 중단
+        player.setDown(false); // while(down) --> false -> while 종료 , Thread 종료
+      }
+
+      //  정수 값 - 1 면 흰색
+      //  정수 값 -65536 면 빨간색
+
       // 왼쪽 벽 충돌 감지 판단
-      if(isRed(leftColor)) {
+      if (isRed(leftColor)) {
         // 충돌 상태 변수 ON
         player.setLeftWallCrash(true);
         player.setLeft(false); // while(false) 종료 --> 이동 멈춤 (Thread 종료)
@@ -53,7 +75,7 @@ public class BackgroundPlayerService implements Runnable {
       }
 
       // 오른쪽 벽 충돌 감지 판단
-      if(isRed(rightColor)) {
+      if (isRed(rightColor)) {
         // 충돌 상태 변수 ON
         player.setRightWallCrash(true); // 충돌 상태 ON
         player.setRight(false);         // while(right) 종료 --> 이동 멈춤 Thread 종료
@@ -68,6 +90,7 @@ public class BackgroundPlayerService implements Runnable {
       }
     }
   }
+
   // 255, 0 , 0 -> 빨간색
   private boolean isRed(Color color) {
     return color.getRed() == 255
