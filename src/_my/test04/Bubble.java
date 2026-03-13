@@ -8,7 +8,7 @@ public class Bubble extends JLabel {
   private int y;
 
   private ImageIcon bubbleIcon;
-  private Player2 player;
+  private Player player;
 
   @Override
   public int getX() {
@@ -28,7 +28,7 @@ public class Bubble extends JLabel {
     this.y = y;
   }
 
-  public Bubble(Player2 player) {
+  public Bubble(Player player) {
     this.player = player;
     initData();
     setInitLayout();
@@ -44,6 +44,7 @@ public class Bubble extends JLabel {
     y = player.getY();
     setSize(50,50);
     setLocation(x, y);
+    setIcon(bubbleIcon);
     setVisible(true);
   }
 

@@ -1,19 +1,18 @@
 package _my.test04;
 
-import _my.test03.Player2;
 
 import javax.swing.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-public class BubbleFrame2 extends JFrame {
+public class BubbleFrame extends JFrame {
 
   private JLabel backgroundMap;
-  private Player2 player;
+  private Player player;
 //  private Enemy enemy;
 
 
-  public BubbleFrame2() {
+  public BubbleFrame() {
     initData();
     setInitLayout();
     addEventListener();
@@ -29,7 +28,7 @@ public class BubbleFrame2 extends JFrame {
     backgroundMap = new JLabel(new ImageIcon("img/backgroundMap.png"));
     setContentPane(backgroundMap);
 
-    player = new Player2();
+    player = new Player();
 //    enemy = new Enemy();
   }
 
@@ -77,13 +76,24 @@ public class BubbleFrame2 extends JFrame {
           case KeyEvent.VK_UP:
             player.up();
             break;
+          case KeyEvent.VK_SPACE:
+            fireBubble();
+            break;
+          }
         }
-      }
+
     });
   }
 
+  private void fireBubble() {
+    Bubble bubble = new Bubble(player);
+    backgroundMap.add(bubble);
+    backgroundMap.revalidate();
+    backgroundMap.repaint();
+  }
+
   public static void main(String[] args) {
-    new BubbleFrame2();
+    new BubbleFrame();
   }
 
 } // end of class

@@ -3,7 +3,7 @@ package _my.test04;
 
 import javax.swing.*;
 
-public class Player2 extends JLabel implements Moveable {
+public class Player extends JLabel implements Moveable {
 
   // 플레이어의 현재 좌표 상태 값
   private int x;
@@ -99,7 +99,7 @@ public class Player2 extends JLabel implements Moveable {
   }
 
 
-  public Player2() {
+  public Player() {
     initData();
     setInitLayout();
   }
