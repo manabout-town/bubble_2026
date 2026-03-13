@@ -1,4 +1,6 @@
-package test03;
+package _my.test04;
+
+import _my.test03.Player2;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -18,15 +20,15 @@ public class BackgroundPlayerService implements Runnable {
   // --> 메모리에 픽셀 배열로 저장된 이미지
   // --> getRGB(x, y)로 특정 좌표의 색상값을 직접 읽을 수 있음
   private BufferedImage image;
-  private Player player;
+  private Player2 player;
 
   // 의존성 주입 DI(Dependency Injection)
   // player 를 생성자를 통해서 외부에서 주입 받음
   // 즉, 이 서비스가 직접 플레이어를 생성하지 않고 외부에서 주입 받아 사용 됨.
-  public BackgroundPlayerService(Player player) {
+  public BackgroundPlayerService(Player2 player) {
     this.player = player;
     try {
-      image = ImageIO.read(new File("img/backgroundMapService.png"));
+      image = ImageIO.read(new File("img/backgroundMap.png"));
     } catch (IOException e) {
       throw new RuntimeException(" 충돌 감지 이미지를 찾을 수 없습니다 " + e);
     }
@@ -41,6 +43,7 @@ public class BackgroundPlayerService implements Runnable {
 
       Color leftColor = new Color(image.getRGB(player.getX(), player.getY() + 25));
       Color rightColor = new Color(image.getRGB(player.getX() + 60, player.getY() + 25));
+
 
       // 왼쪽 벽 충돌 감지 판단
       if(isRed(leftColor)) {
@@ -74,5 +77,5 @@ public class BackgroundPlayerService implements Runnable {
         && color.getGreen() == 0
         && color.getBlue() == 0;
   }
+  }
 
-}

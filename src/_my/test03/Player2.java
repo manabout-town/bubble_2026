@@ -1,9 +1,9 @@
-package test03;
+package _my.test03;
 
 
 import javax.swing.*;
 
-public class Player extends JLabel implements Moveable {
+public class Player2 extends JLabel implements Moveable {
 
   // 플레이어의 현재 좌표 상태 값
   private int x;
@@ -99,7 +99,7 @@ public class Player extends JLabel implements Moveable {
   }
 
 
-  public Player() {
+  public Player2() {
     initData();
     setInitLayout();
   }
@@ -111,7 +111,7 @@ public class Player extends JLabel implements Moveable {
 
   private void setInitLayout() {
     // 캐릭터 초기 위치 설정
-    x = 55;
+    x = 450;
     y = 535;
     setSize(50, 50);
     setIcon(playerR); // 초기 방향 설정
